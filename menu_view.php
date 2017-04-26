@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<p>THIS IS A BLANK MENU PAGE</p>
+<p>THIS IS A BLANK MENU PAGE!</p>
 
 </body>
 </html>
