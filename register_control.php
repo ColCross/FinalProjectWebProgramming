@@ -3,22 +3,22 @@
 
 <?php
 $servername = "localhost";
-$username = "username";
-$password = "password";
+$username = "test";
+$password = "test314account";
 
-$f_name = $_POST["fname"];
-$l_name = $_POST["lname"];
+$f_name = $_POST["f_name"];
+$l_name = $_POST["l_name"];
 $usr_name = $_POST["usr_name"];
 $password = $_POST["password"];
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli("localhost", "test", "test314account");  // Hardcoded for now
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
+echo "Connected successfully<br>";
 
 $sql = "
 CREATE TABLE IF NOT EXISTS `WebStore`.`customers` (
@@ -33,18 +33,20 @@ ENGINE = InnoDB;
 ";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Table customers created successfully";
+    echo "Table customers created successfully<br>";
 } else {
     echo "Error creating table: " . $conn->error;
 }
 
-$insert = "INSERT INTO customers (f_name, l_name, usr_name, password)
-VALUES ('{$f_name}', '{$l_name}', '{$usr_name}', '{$password}'";
+$insert = "
+INSERT INTO webstore.customers (f_name, l_name, usr_name, password)
+VALUES ('{$f_name}', '{$l_name}', '{$usr_name}', '{$password}')
+";
 
 if ($conn->query($insert) === TRUE) {
-    echo "New record created successfully";
+    echo "New record created successfully<br>";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $insert . "<br>" . $conn->error;
 }
 
 $conn->close();
