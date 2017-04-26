@@ -3,6 +3,9 @@
 
 <?php
 
+// Debug mode
+$debug = false;
+
 // Server login credentials
 $servername = "localhost";
 $username = "test";
@@ -19,9 +22,12 @@ $conn = new mysqli("localhost", "test", "test314account");  // Hardcoded for now
 
 // Check connection
 if ($conn->connect_error) {
+    echo "The database could not be reached.";
     die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully<br>";
+if($debug) {
+    echo "Connected successfully<br>";
+}
 
 // Create table if it doesn't exist
 $sql = "
@@ -37,9 +43,13 @@ ENGINE = InnoDB;
 ";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Table customers created successfully<br>";
+    if ($debug) {
+        echo "Table customers created successfully<br>";
+    }
 } else {
-    echo "Error creating table: " . $conn->error;
+    if ($debug) {
+        echo "Error creating table: " . $conn->error . "<br>";
+    }
 }
 
 // Insert the entered user info into the table
@@ -49,13 +59,23 @@ VALUES ('{$f_name}', '{$l_name}', '{$usr_name}', '{$password}')
 ";
 
 if ($conn->query($insert) === TRUE) {
-    echo "New record created successfully<br>";
+    if ($debug) {
+        echo "New record created successfully<br>";
+    }
+    echo "You have successfully registered as \"" . $usr_name . "\".<br>";
 } else {
-    echo "Error: " . $insert . "<br>" . $conn->error;
+    if ($debug) {
+        echo "Error: " . $insert . "<br>" . $conn->error;
+    }
+    echo "The username \"" . $usr_name . "\" has already been taken.<br>";
 }
 
 // Close the connection
 $conn->close();
+
+// Provide a link to the login page
+echo "<a href='./login_view.html'>Login</a>"
+
 ?>
 
 </body>

@@ -29,14 +29,21 @@ WHERE cust.usr_name = '{$usr_name}';
 
 $results = $conn->query($getUserLogin);
 
-if ($results->num_rows > 0) {
-    // output data of each row
-    while($row = $results->fetch_assoc()) {
-        echo "user: " . $row["usr_name"] . "<br>";
-        echo "password: " . $row["password"] . "<br>";
+// Check the password against the password supplied
+if ($results->num_rows == 1) {
+
+    $row = $results -> fetch_assoc();
+    echo "user: " . $row["usr_name"] . "<br>";
+    echo "password: " . $row["password"] . "<br>";
+
+    if($row["password"] == $password){
+        echo "Password match";
+    } else {
+        echo "Password mismatch";
     }
+
 } else {
-    echo "0 results";
+    echo "Invalid Result";
 }
 
 $conn->close();
