@@ -2,6 +2,9 @@ Retriedbody>
 
 <?php
 
+// Debug mode
+$debug = false;
+
 // Server login credentials
 $servername = "localhost";
 $username = "test";
@@ -18,7 +21,9 @@ $conn = new mysqli("localhost", "test", "test314account");  // Hardcoded for now
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully<br>";
+if ($debug) {
+    echo "Connected successfully<br>";
+}
 
 // Get the passwords with the supplied username
 $getUserLogin = "
@@ -33,21 +38,31 @@ $results = $conn->query($getUserLogin);
 if ($results->num_rows == 1) {
 
     $row = $results -> fetch_assoc();
-    echo "user: " . $row["usr_name"] . "<br>";
-    echo "password: " . $row["password"] . "<br>";
+
+    if($debug) {
+        echo "user: " . $row["usr_name"] . "<br>";
+        echo "password: " . $row["password"] . "<br>";
+    }
 
     if($row["password"] == $password){
-        echo "Password match";
+
+        // Go to the menu page
+        header("Location: ./menu_view.html");
+        exit;
+
     } else {
         echo "Password mismatch";
     }
 
 } else {
-    echo "Invalid Result";
+    echo "The user \"" . $usr_name . "\" is not registered.";
 }
 
 $conn->close();
 ?>
+
+<!--Link to registration and login-->
+<a href="login_view.html">Login</a><a href="register_view.html">Register</a>
 
 </body>
 </html>

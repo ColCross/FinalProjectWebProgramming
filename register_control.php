@@ -72,11 +72,10 @@ if ($conn->query($insert) === TRUE) {
 
 // Close the connection
 $conn->close();
-
-// Provide a link to the login page
-echo "<a href='./login_view.html'>Login</a>"
-
 ?>
+
+<!--Link to registration and login-->
+<a href="login_view.html">Login</a><a href="register_view.html">Register</a>
 
 </body>
 </html>
