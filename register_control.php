@@ -1,12 +1,15 @@
+<html>
+<body>
+
 <?php
 $servername = "localhost";
 $username = "username";
 $password = "password";
 
-$f_name = "";
-$l_name = "";
-$usr_name = "";
-$password = "";
+$f_name = $_POST["fname"];
+$l_name = $_POST["lname"];
+$usr_name = $_POST["usr_name"];
+$password = $_POST["password"];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -43,3 +46,9 @@ if ($conn->query($insert) === TRUE) {
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
+
+$conn->close();
+?>
+
+</body>
+</html>
