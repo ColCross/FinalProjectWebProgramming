@@ -1,5 +1,3 @@
-Retriedbody>
-
 <?php
 
 // Debug mode
@@ -47,11 +45,13 @@ if ($results->num_rows == 1) {
     if($row["password"] == $password){
 
         // Go to the menu page
-        header("Location: ./menu_view.html");
+        header("Location: ./menu_view.php");
         exit;
 
     } else {
-        echo "Password mismatch";
+
+        // Password doesn't match
+        echo "Invalid password.";
     }
 
 } else {
@@ -62,7 +62,4 @@ $conn->close();
 ?>
 
 <!--Link to registration and login-->
-<a href="login_view.html">Login</a><a href="register_view.html">Register</a>
-
-</body>
-</html>
+<a href="login_view.php">Login</a><a href="register_view.php">Register</a>

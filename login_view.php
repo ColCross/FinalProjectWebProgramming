@@ -21,7 +21,7 @@
     <input type="submit" value="Submit">
 
     <!--Link to the registration page-->
-    <a href="./register_view.html">Register</a>
+    <a href="register_view.php">Register</a>
 </form>
 
 </body>

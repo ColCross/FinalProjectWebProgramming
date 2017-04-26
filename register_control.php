@@ -1,6 +1,3 @@
-<html>
-<body>
-
 <?php
 
 // Debug mode
@@ -75,7 +72,4 @@ $conn->close();
 ?>
 
 <!--Link to registration and login-->
-<a href="login_view.html">Login</a><a href="register_view.html">Register</a>
-
-</body>
-</html>
+<a href="login_view.php">Login</a><a href="register_view.php">Register</a>
