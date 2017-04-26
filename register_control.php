@@ -2,10 +2,13 @@
 <body>
 
 <?php
+
+// Server login credentials
 $servername = "localhost";
 $username = "test";
 $password = "test314account";
 
+// Post data
 $f_name = $_POST["f_name"];
 $l_name = $_POST["l_name"];
 $usr_name = $_POST["usr_name"];
@@ -20,6 +23,7 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully<br>";
 
+// Create table if it doesn't exist
 $sql = "
 CREATE TABLE IF NOT EXISTS `WebStore`.`customers` (
 `id` INT NOT NULL AUTO_INCREMENT,
@@ -38,6 +42,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error;
 }
 
+// Insert the entered user info into the table
 $insert = "
 INSERT INTO webstore.customers (f_name, l_name, usr_name, password)
 VALUES ('{$f_name}', '{$l_name}', '{$usr_name}', '{$password}')
@@ -49,6 +54,7 @@ if ($conn->query($insert) === TRUE) {
     echo "Error: " . $insert . "<br>" . $conn->error;
 }
 
+// Close the connection
 $conn->close();
 ?>
 
