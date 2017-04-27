@@ -26,29 +26,6 @@ if($debug) {
     echo "Connected successfully<br>";
 }
 
-// Create table if it doesn't exist
-$sql = "
-CREATE TABLE IF NOT EXISTS `WebStore`.`customers` (
-`id` INT NOT NULL AUTO_INCREMENT,
-`f_name` VARCHAR(45) NOT NULL,
-`l_name` VARCHAR(45) NOT NULL,
-`usr_name` VARCHAR(45) NOT NULL,
-`password` VARCHAR(45) NOT NULL,
-PRIMARY KEY (`id`),
-UNIQUE INDEX `usr_name_UNIQUE` (`usr_name` ASC))
-ENGINE = InnoDB;
-";
-
-if ($conn->query($sql) === TRUE) {
-    if ($debug) {
-        echo "Table customers created successfully<br>";
-    }
-} else {
-    if ($debug) {
-        echo "Error creating table: " . $conn->error . "<br>";
-    }
-}
-
 // Insert the entered user info into the table
 $insert = "
 INSERT INTO webstore.customers (f_name, l_name, usr_name, password)

@@ -22,11 +22,11 @@ if (isset($_SESSION['id'])) {
 }
 ?>
 
-<p>THIS IS A BLANK MENU PAGE!</p>
-
-<a href="profile_view.php">Profile</a>
-
-<p>FUTURE LINK TO STORE</p>
+<a href="./profile_view.php">Profile</a>
+<br>
+<a href="./cart_view.php">Cart</a>
+<br>
+<a href="./store_view.php">Store</a>
 
 </body>
 </html>
