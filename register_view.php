@@ -29,7 +29,7 @@
     <input type="submit" value="Submit">
 
     <!--Link to the login page-->
-    <a href="login_view.php">Login</a>
+    <a href="./login_view.php">Login</a>
 </form>
 
 </body>
