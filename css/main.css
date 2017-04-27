@@ -1,0 +1,35 @@
+body {
+    background-color: #004E98;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* Center main div */
+
+.wrapper {
+    height: 500px;
+    width: 500px;
+    background-color: #EBEBEB;
+    border-radius: 50px;
+}
+
+.Absolute-Center {
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+/* Center content inside main div */
+
+.content {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+}
