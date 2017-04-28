@@ -7,6 +7,10 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Cart</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/cart.css">
 </head>
 <body>
 
@@ -27,7 +31,7 @@ if (isset($_SESSION["cart"]) && isset($_SESSION["inventory"])) {
     }
 
     // Display the total
-    echo "Total: $" . $total;
+    echo "<p>Total: $" . $total ."</p>";
 
     // Remove the inventory from the session
     unset($_SESSION["inventory"]);

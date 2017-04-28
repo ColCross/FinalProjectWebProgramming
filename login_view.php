@@ -14,7 +14,7 @@
     <form action="./login_control.php" class="form-horizontal" method="post">
 
         <div class="content">
-            <h3 class="center-text">Login</h3>
+            <h3 class="center-text">User Login</h3>
             <br>
 
             <!--User name input field-->
@@ -33,7 +33,7 @@
             <div class="center-text">
                 <!--Submit button-->
                 <br>
-                <input type="submit" class="btn-primary btn-md center-text" value="Submit">
+                <input type="submit" class="btn-primary btn-md center-text" value="Login">
                 <br>
                 <br>
 

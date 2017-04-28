@@ -42,7 +42,7 @@ if (isset($_SESSION["cart"]) && isset($_SESSION["inventory"])) {
 ?>
 
 <a href="./checkout_control.php">
-    <button>Checkout</button>
+    <button class="btn-primary btn-md center-text">Checkout</button>
 </a>
 
 </body>
