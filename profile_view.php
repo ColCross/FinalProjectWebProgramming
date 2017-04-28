@@ -21,11 +21,28 @@ session_start();
         // Check if the session has an id
         if (isset($_SESSION['id'])) {
 
+            if (!isset($_SESSION["orders"])){
+
+                // Get the orders
+                header("Location: ./profile_control.php");
+                exit;
+            }
+
             // Display user info
             echo "<div class='center-text'>";
             echo "<p>First name: " . $_SESSION["f_name"] . "</p>";
             echo "<p>Last name: " . $_SESSION["l_name"] . "</p>";
             echo "<p>User id: " . $_SESSION["id"] . "</p>";
+            echo "</div>";
+
+            // Print the orders
+            echo "<div class='center-text'>";
+            echo "<h2>Orders</h2>";
+            foreach ($_SESSION["orders"] as $row) {
+                echo "<p> Item: " . $row["name"] . "</p>";
+                echo "<p> Quantity: " . $row["quantity"] . "</p>";
+                echo "<br>";
+            }
             echo "</div>";
 
         } else {
@@ -37,6 +54,7 @@ session_start();
             echo "<a href='./login_view.php' style='padding-right: 20px;'>Login</a><a href='./register_view.php'>Register</a>";
             echo "</div>";
         }
+
         ?>
 
         <div class="nav">

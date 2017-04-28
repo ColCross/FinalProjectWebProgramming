@@ -31,7 +31,7 @@ session_start();
         <br>
         <br>
         <div class="nav">
-            <form action="./profile_view.php">
+            <form action="./profile_control.php">
                 <input type="submit" class="btn-primary btn-md center-text" value="Profile"/>
             </form>
 

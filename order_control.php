@@ -85,6 +85,6 @@ foreach ($_SESSION["cart"] as $item) {
 $conn->close();
 
 // Route to the profile page
-header("Location: ./profile_view.php");
+header("Location: ./profile_control.php");
 exit;
 ?>
