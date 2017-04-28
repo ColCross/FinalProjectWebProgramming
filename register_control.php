@@ -44,7 +44,7 @@ if ($conn->query($insert) === TRUE) {
     echo "The username \"" . $usr_name . "\" has already been taken.<br>";
 }
 
-// Close the connection
+// Close connection
 $conn->close();
 
 // Route to the login page
