@@ -7,43 +7,51 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Cart</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/cart.css">
 </head>
 <body>
 
-<?php
+<div class="wrapper">
 
-// Check for a cart in the session
-if (isset($_SESSION["cart"]) && isset($_SESSION["inventory"])) {
+    <?php
 
-    // Print everything in the inventory
-    foreach ($_SESSION["cart"] as $item) {
+    // Check for a cart in the session
+    if (isset($_SESSION["cart"]) && isset($_SESSION["inventory"])) {
 
-        foreach ($_SESSION["inventory"] as $row) {
+        // Print everything in the inventory
+        foreach ($_SESSION["cart"] as $item) {
 
-            if($item[0] == $row["id"]){
-                echo "<p> Item: " . $row["name"] . "</p>";
-                echo "<p> Price: " . $row["price"] . "</p>";
-                echo "<p> Quantity: " . $item[1] . "</p>";
-                echo "<br>";
+            foreach ($_SESSION["inventory"] as $row) {
+
+                if ($item[0] == $row["id"]) {
+                    echo "<p> Item: " . $row["name"] . "</p>";
+                    echo "<p> Price: " . $row["price"] . "</p>";
+                    echo "<p> Quantity: " . $item[1] . "</p>";
+                    echo "<br>";
+                }
             }
         }
+
+        // Remove the inventory from the session
+        unset($_SESSION["inventory"]);
+
+    } else {
+
+        // Send to the store front
+        header("Location: ./store_view.php");
+        exit;
     }
 
-    // Remove the inventory from the session
-    unset($_SESSION["inventory"]);
+    ?>
 
-} else {
+    <a href="./checkout_control.php">
+        <button class="btn-primary btn-md center-text">Checkout</button>
+    </a>
 
-    // Send to the store front
-    header("Location: ./store_view.php");
-    exit;
-}
-
-?>
-
-<a href="./checkout_control.php">
-    <button class="btn-primary btn-md center-text">Checkout</button>
-</a>
+</div>
 
 </body>
 </html>
