@@ -46,7 +46,8 @@ if ($conn->query($insert) === TRUE) {
 
 // Close the connection
 $conn->close();
-?>
 
-<!--Link to registration and login-->
-<a href="./login_view.php">Login</a><a href="./register_view.php">Register</a>
+// Route to the login page
+header("Location: ./login_view.php");
+exit;
+?>

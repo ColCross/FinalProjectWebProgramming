@@ -35,6 +35,9 @@ while ($row = $results -> fetch_array()){
     $resultsArray[] = $row;
 }
 
+// Close the connection
+$conn->close();
+
 // Add the results to the session and redirect to the cart page
 $_SESSION["inventory"] = $resultsArray;
 header("Location: ./checkout_view.php");

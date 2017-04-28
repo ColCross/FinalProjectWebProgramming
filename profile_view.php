@@ -38,6 +38,12 @@ session_start();
             echo "</div>";
         }
         ?>
+
+        <div class="nav">
+            <form action="./menu_view.php">
+                <input type="submit" class="btn-primary btn-md center-text" value="Menu"/>
+            </form>
+        </div>
     </div>
 </div>
 </body>

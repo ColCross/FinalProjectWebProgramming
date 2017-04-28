@@ -17,51 +17,74 @@ if ($conn->connect_error) {
     echo "The database could not be reached.";
     die("Connection failed: " . $conn->connect_error);
 }
-if($debug) {
+if ($debug) {
     echo "Connected successfully<br>";
 }
 
 // Insert the orders into the table
 foreach ($_SESSION["cart"] as $item) {
+
+    // Create order query
     $insertOrder = "
+    INSERT INTO webstore.orders(customer_id, inventory_id, quantity)
+    VALUES ('{$_SESSION['id']}', '{$item[0]}', '{$item[1]}');
     ";
+
+    // Send query
+    if ($conn->query($insertOrder) === TRUE) {
+        if ($debug) {
+            echo "Order Added<br>";
+        }
+    } else {
+        if ($debug) {
+            echo "Error: " . $insertOrder . "<br>" . $conn->error;
+        }
+    }
 }
 
-$insert = "
-INSERT INTO webstore.customers (f_name, l_name, usr_name, password)
-VALUES ('{$f_name}', '{$l_name}', '{$usr_name}', '{$password}')
-";
+// Look for items in inventory and update the stock
+foreach ($_SESSION["cart"] as $item) {
 
-if ($conn->query($insert) === TRUE) {
-    if ($debug) {
-        echo "New record created successfully<br>";
+    // Get the info for the inventory
+    $getInventory = "
+    SELECT *
+    FROM webstore.inventory;
+     ";
+
+    // Send query
+    $results = $conn->query($getInventory);
+
+    // output data of each row
+    while ($row = $results->fetch_assoc()) {
+
+        // Check the order id against the inventory id
+        if ($row["id"] == $item[0]) {
+
+            $newStock = ($row["stock"] - $item[1]);
+
+            // Update the stock in the database
+            $updateInventory = "
+            UPDATE webstore.inventory SET stock='{$newStock}' WHERE id='{$row["id"]}';
+            ";
+
+            // Send query
+            if ($conn->query($updateInventory) === TRUE) {
+                if ($debug) {
+                    echo "Stock Updated<br>";
+                }
+            } else {
+                if ($debug) {
+                    echo "Error: " . $updateInventory . "<br>" . $conn->error;
+                }
+            }
+        }
     }
-    echo "You have successfully registered as \"" . $usr_name . "\".<br>";
-} else {
-    if ($debug) {
-        echo "Error: " . $insert . "<br>" . $conn->error;
-    }
-    echo "The username \"" . $usr_name . "\" has already been taken.<br>";
-}
-
-// Get the info for the inventory
-$getInventory = "
-SELECT *
-FROM webstore.inventory;
-";
-
-// Send query
-$results = $conn->query($getInventory);
-
-// Build the result into an array
-$resultsArray = array();
-while ($row = $results -> fetch_array()){
-    $resultsArray[] = $row;
 }
 
 // Close the connection
 $conn->close();
-?>
 
-<!--Link to registration and login-->
-<a href="./login_view.php">Login</a><a href="./register_view.php">Register</a>
+// Route to the profile page
+header("Location: ./profile_view.php");
+exit;
+?>
